@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'Unbounded';
+  src: url('fonts/unbounded-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a0a12;
+  --glass: rgba(255, 255, 255, 0.045);
+  --glass-hi: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #eceaff;
+  --muted: #9a98bf;
+  --faint: #66648a;
+  --spectrum: linear-gradient(120deg, #7f9cff, #b46bff 38%, #ff8fb1 70%, #ffc46b);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  width: 368px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Inter, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Drifting aurora behind the glass. */
+.aurora { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.aurora i {
+  position: absolute; width: 260px; height: 260px; border-radius: 50%;
+  filter: blur(60px); opacity: 0.55; animation: drift 18s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(1) { background: #6a5cff; top: -110px; left: -70px; }
+.aurora i:nth-child(2) { background: #ff6fae; top: 140px; right: -150px; animation-duration: 22s; opacity: 0.35; }
+.aurora i:nth-child(3) { background: #36d7ff; bottom: -160px; left: 40px; animation-duration: 26s; opacity: 0.3; }
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(40px, 30px) scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }
+
+.shell { position: relative; z-index: 1; padding: 14px; display: grid; gap: 10px; }
+
+.top { display: flex; align-items: center; gap: 12px; }
+.mark { filter: drop-shadow(0 6px 18px rgba(150, 110, 255, 0.45)); }
+.brand { flex: 1; min-width: 0; }
+.brand h1 {
+  margin: 0; font: 700 18px/1 'Unbounded', ui-sans-serif, system-ui; letter-spacing: 0.02em;
+  background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.brand p { margin: 4px 0 0; color: var(--muted); font-size: 11.5px; }
+
+/* Power toggle */
+.power input { position: absolute; opacity: 0; pointer-events: none; }
+.power-track {
+  display: block; width: 46px; height: 26px; border-radius: 99px; background: var(--glass-hi);
+  border: 1px solid var(--line); position: relative; cursor: pointer; transition: background 0.25s;
+}
+.power-knob {
+  position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%;
+  background: #cfcde8; transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.25s;
+}
+.power input:checked + .power-track { background: var(--spectrum); border-color: transparent; }
+.power input:checked + .power-track .power-knob { transform: translateX(20px); background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.power input:focus-visible + .power-track { outline: 2px solid #b46bff; outline-offset: 2px; }
+
+.block {
+  background: var(--glass); border: 1px solid var(--line); border-radius: 18px; padding: 10px;
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.block h2 {
+  margin: 2px 2px 8px; font: 600 10.5px/1 ui-sans-serif, system-ui; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--faint);
+}
+
+.editions { display: grid; gap: 3px; }
+.edition {
+  all: unset; box-sizing: border-box; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px;
+  padding: 6px 9px 6px 11px; border-radius: 12px; cursor: pointer; position: relative; min-width: 0;
+  border: 1px solid transparent; transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.edition:hover { background: var(--glass-hi); }
+.edition:focus-visible { outline: 2px solid #b46bff; outline-offset: 1px; }
+.edition[aria-checked='true'] {
+  background: linear-gradient(var(--bg-card, #15142a), var(--bg-card, #15142a)) padding-box, var(--spectrum) border-box;
+  border-color: transparent; box-shadow: 0 8px 28px -12px rgba(160, 110, 255, 0.7);
+}
+.edition .name { font: 700 12px/1 'Unbounded', ui-sans-serif, system-ui; letter-spacing: 0.03em; }
+.edition > span:first-child { min-width: 0; }
+.edition .tag { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.edition .icons { display: flex; gap: 2px; }
+.edition .icons img { width: 18px; height: 18px; display: block; }
+
+.options { display: grid; gap: 0; padding: 2px 12px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; cursor: pointer; }
+.row + .row { border-top: 1px solid var(--line); }
+.row b { display: block; font-weight: 600; font-size: 12.5px; }
+.row small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+
+.switch {
+  appearance: none; width: 36px; height: 21px; border-radius: 99px; background: var(--glass-hi); margin: 0;
+  border: 1px solid var(--line); position: relative; cursor: pointer; transition: background 0.2s; flex: none;
+}
+.switch::after {
+  content: ''; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%;
+  background: #cfcde8; transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.switch:checked { background: linear-gradient(120deg, #7f9cff, #b46bff); border-color: transparent; }
+.switch:checked::after { transform: translateX(15px); background: #fff; }
+.switch:focus-visible { outline: 2px solid #b46bff; outline-offset: 2px; }
+
+.segmented { display: inline-flex; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--line); border-radius: 10px; padding: 2px; flex: none; }
+.segmented button {
+  all: unset; padding: 5px 9px; border-radius: 8px; font-size: 11px; color: var(--muted); cursor: pointer; transition: all 0.2s;
+}
+.segmented button[aria-checked='true'] { background: var(--glass-hi); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+.segmented button:focus-visible { outline: 2px solid #b46bff; }
+
+.foot { display: flex; justify-content: space-between; align-items: center; padding: 0 4px; }
+.gallery-link {
+  color: var(--text); text-decoration: none; font-weight: 600; font-size: 12px;
+  background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gallery-link:hover { filter: brightness(1.2); }
+.ver { color: var(--faint); font-size: 11px; }
+
+body.off .editions, body.off .options { opacity: 0.45; filter: saturate(0.4); transition: opacity 0.3s, filter 0.3s; }

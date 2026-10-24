@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lumora Icon Atelier</title>
+    <link rel="icon" href="favicon.svg" />
+    <meta name="description" content="Lumora — premium, abstract file and folder icons for VS Code and GitHub. Five editions from one hand-drawn glyph library." />
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body data-canvas="dark">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <header class="nav">
+      <a class="logo" href="#top"><span id="mark"></span><span>Lumora</span></a>
+      <nav>
+        <a href="#gallery">Gallery</a>
+        <a href="#install">Install</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow">Icon atelier · v1.0</p>
+        <h1>Icons, cut<br />like <span class="spectrum">light.</span></h1>
+        <p class="lede">
+          A premium, abstract icon system for VS Code and GitHub. One hand-drawn glyph library,
+          rendered in five materials — from luminous glass to champagne gold.
+        </p>
+        <dl class="stats">
+          <div><dt id="stat-files">—</dt><dd>file icons</dd></div>
+          <div><dt id="stat-folders">—</dt><dd>folder themes</dd></div>
+          <div><dt id="stat-names">—</dt><dd>names &amp; extensions</dd></div>
+          <div><dt>5</dt><dd>editions</dd></div>
+        </dl>
+      </section>
+
+      <section class="controls" aria-label="Display options">
+        <div class="editions" id="editions" role="radiogroup" aria-label="Edition"></div>
+        <div class="segmented" id="canvas" role="radiogroup" aria-label="Canvas">
+          <button data-canvas="dark" aria-checked="true">Dark</button><button data-canvas="light">Light</button>
+        </div>
+      </section>
+
+      <section class="showcase">
+        <div class="pane explorer">
+          <div class="pane-head"><span class="dots"><i></i><i></i><i></i></span>Explorer · actual size</div>
+          <ul class="tree" id="tree"></ul>
+        </div>
+        <div class="pane spotlight">
+          <div class="pane-head"><span class="dots"><i></i><i></i><i></i></span><span id="edition-name">Aurora</span> · <span id="edition-tag"></span></div>
+          <div class="spot-grid" id="spotlight"></div>
+        </div>
+      </section>
+
+      <section class="gallery" id="gallery">
+        <div class="gallery-head">
+          <div class="tabs" role="tablist">
+            <button role="tab" data-tab="files" aria-selected="true">Files <span id="count-files"></span></button>
+            <button role="tab" data-tab="folders" aria-selected="false">Folders <span id="count-folders"></span></button>
+          </div>
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 20 20" /></svg>
+            <input type="search" id="q" placeholder="Search names, extensions, folders…" autocomplete="off" />
+          </label>
+        </div>
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>Nothing matches — Lumora will fall back to its default icon.</p>
+      </section>
+
+      <section class="install" id="install">
+        <h2>Install</h2>
+        <div class="cards">
+          <article>
+            <h3>VS Code</h3>
+            <p>Install <code>lumora-icons-1.0.0.vsix</code> via <em>Extensions → … → Install from VSIX</em>, then run <em>Preferences: File Icon Theme</em> and pick any <b>Lumora</b> edition.</p>
+          </article>
+          <article>
+            <h3>Chrome · Edge · Brave · Arc</h3>
+            <p>Open <code>chrome://extensions</code>, enable Developer mode, choose <em>Load unpacked</em> and select <code>extensions/chrome</code>. Switch editions from the toolbar popup.</p>
+          </article>
+          <article>
+            <h3>Color themes</h3>
+            <p>The VS Code extension also ships <b>Lumora Midnight</b> and <b>Lumora Daybreak</b> — editor themes tuned to sit behind the icons.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">Lumora · MIT licensed · Monograms set in Unbounded (OFL)</footer>
+    <script src="gallery.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lumora</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <main class="shell">
+      <header class="top">
+        <img class="mark" src="icons/mark.svg" alt="" width="40" height="40" />
+        <div class="brand">
+          <h1>Lumora</h1>
+          <p>Premium icons for GitHub</p>
+        </div>
+        <label class="power" title="Enable Lumora on GitHub">
+          <input type="checkbox" id="enabled" />
+          <span class="power-track"><span class="power-knob"></span></span>
+        </label>
+      </header>
+
+      <section class="block">
+        <h2>Edition</h2>
+        <div class="editions" id="editions" role="radiogroup" aria-label="Edition"></div>
+      </section>
+
+      <section class="block options">
+        <label class="row">
+          <span><b>Folder icons</b><small>Themed directories with emblems</small></span>
+          <input type="checkbox" id="folders" class="switch" />
+        </label>
+        <label class="row">
+          <span><b>Hover motion</b><small>A subtle lift as you browse</small></span>
+          <input type="checkbox" id="hover" class="switch" />
+        </label>
+        <div class="row">
+          <span><b>Appearance</b><small>Matches GitHub when on Auto</small></span>
+          <div class="segmented" id="mode" role="radiogroup" aria-label="Appearance">
+            <button data-mode="auto">Auto</button><button data-mode="dark">Dark</button><button data-mode="light">Light</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <a href="dist/gallery.html" target="_blank" class="gallery-link">Explore the gallery <span aria-hidden="true">↗</span></a>
+        <span class="ver" id="version"></span>
+      </footer>
+    </main>
+    <script src="dist/popup.js"></script>
+  </body>
+</html>

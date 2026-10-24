@@ -1,0 +1,27 @@
+{
+  "name": "lumora-icons-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "@expo-google-fonts/unbounded": "^0.4.1",
+    "@fontsource/unbounded": "^5.3.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "opentype.js": "^2.0.0",
+    "playwright": "1.63.0"
+  },
+  "description": "Lumora — premium, abstract file & folder icons for VS Code and GitHub (Chrome).",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:vscode": "node scripts/build.js --vscode",
+    "build:web": "node scripts/build.js --web",
+    "test": "node --test tests/*.test.js",
+    "render:brand": "node scripts/render-brand.js",
+    "render:previews": "node scripts/render-previews.js",
+    "package:vscode": "npm run build:vscode && node -e \"require('fs').mkdirSync('release',{recursive:true})\" && cd extensions/vscode && vsce package --no-dependencies --out ../../release",
+    "package:chrome": "npm run build:web && node scripts/package-chrome.js",
+    "package": "npm run package:vscode && npm run package:chrome"
+  },
+  "license": "MIT"
+}

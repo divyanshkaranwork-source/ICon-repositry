@@ -1,0 +1,142 @@
+<!doctype html>
+<!-- Mirrors the DOM shapes GitHub uses for repository trees (React table,
+     Primer TreeView sidebar, PR file tree, and the legacy Box-row grid). -->
+<html lang="en" data-color-mode="dark" data-dark-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>lumora/demo · GitHub</title>
+    <style>
+      body { background: #0d1117; color: #e6edf3; font: 14px system-ui; display: flex; gap: 24px; padding: 20px; }
+      table, ul { border: 1px solid #30363d; border-radius: 6px; padding: 8px; }
+      ul { list-style: none; margin: 0; }
+      td, li { padding: 3px 8px; }
+      a { color: inherit; text-decoration: none; }
+      svg { vertical-align: text-bottom; }
+      [role="group"] { border: 0; padding-left: 16px; }
+    </style>
+  </head>
+  <body>
+    <!-- 1 · React directory listing -->
+    <table aria-labelledby="folders-and-files" id="react-table">
+      <tbody>
+        <tr class="react-directory-row" id="folder-row-0">
+          <td class="react-directory-row-name-cell-large-screen">
+            <div class="react-directory-filename-column">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file-directory-fill icon-directory" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"></path></svg>
+              <div class="overflow-hidden"><div class="react-directory-filename-cell"><div class="react-directory-truncate"><a title=".github" aria-label=".github, (Directory)" class="Link--primary" href="#">.github</a></div></div></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="react-directory-row" id="folder-row-1">
+          <td class="react-directory-row-name-cell-large-screen">
+            <div class="react-directory-filename-column">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file-directory-fill icon-directory" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1h12.5v14H1.75z"></path></svg>
+              <div class="overflow-hidden"><div class="react-directory-filename-cell"><div class="react-directory-truncate"><a title="docs/guides" aria-label="docs/guides, (Directory)" class="Link--primary" href="#">docs/guides</a></div></div></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="react-directory-row" id="folder-row-2">
+          <td class="react-directory-row-name-cell-large-screen">
+            <div class="react-directory-filename-column">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586z"></path></svg>
+              <div class="overflow-hidden"><div class="react-directory-filename-cell"><div class="react-directory-truncate"><a title="package.json" aria-label="package.json, (File)" class="Link--primary" href="#">package.json</a></div></div></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="react-directory-row" id="folder-row-3">
+          <td class="react-directory-row-name-cell-large-screen">
+            <div class="react-directory-filename-column">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 1.75z"></path></svg>
+              <div class="overflow-hidden"><div class="react-directory-filename-cell"><div class="react-directory-truncate"><a title="README.md" aria-label="README.md, (File)" class="Link--primary" href="#">README.md</a></div></div></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="react-directory-row" id="folder-row-4">
+          <td class="react-directory-row-name-cell-large-screen">
+            <div class="react-directory-filename-column">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file-submodule" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M0 2.75z"></path></svg>
+              <div class="overflow-hidden"><div class="react-directory-filename-cell"><div class="react-directory-truncate"><a title="vendor" aria-label="vendor, (Submodule)" class="Link--primary" href="#">vendor</a></div></div></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 2 · Primer TreeView sidebar -->
+    <ul role="tree" aria-label="Files" id="tree">
+      <li role="treeitem" aria-expanded="true" id="src-item" class="PRIVATE_TreeView-item" aria-level="1">
+        <div class="PRIVATE_TreeView-item-container">
+          <div class="PRIVATE_TreeView-item-content">
+            <div class="PRIVATE_TreeView-item-visual" aria-hidden="true">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file-directory-open-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M.513 1.513z"></path></svg>
+            </div>
+            <span class="PRIVATE_TreeView-item-content-text"><span>src</span></span>
+          </div>
+        </div>
+        <ul role="group">
+          <li role="treeitem" aria-expanded="false" id="src/components-item" class="PRIVATE_TreeView-item" aria-level="2">
+            <div class="PRIVATE_TreeView-item-container">
+              <div class="PRIVATE_TreeView-item-content">
+                <div class="PRIVATE_TreeView-item-visual" aria-hidden="true">
+                  <svg aria-hidden="true" focusable="false" class="octicon octicon-file-directory-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1z"></path></svg>
+                </div>
+                <span class="PRIVATE_TreeView-item-content-text"><span>components</span></span>
+              </div>
+            </div>
+          </li>
+          <li role="treeitem" id="src/App.tsx-item" class="PRIVATE_TreeView-item" aria-level="2">
+            <div class="PRIVATE_TreeView-item-container">
+              <div class="PRIVATE_TreeView-item-content">
+                <div class="PRIVATE_TreeView-item-visual" aria-hidden="true">
+                  <svg aria-hidden="true" focusable="false" class="octicon octicon-file" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 1.75z"></path></svg>
+                </div>
+                <span class="PRIVATE_TreeView-item-content-text"><span>App.tsx</span></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <!-- Newer Primer builds use hashed CSS-module class names. -->
+      <li role="treeitem" id="Dockerfile-item" class="prc-TreeView-TreeViewItem-ShJr0" aria-level="1">
+        <div class="prc-TreeView-TreeViewItemContainer-k5Abc">
+          <div class="prc-TreeView-TreeViewItemContent-f0r0b">
+            <div class="prc-TreeView-TreeViewItemVisual-dRlGq" aria-hidden="true">
+              <svg aria-hidden="true" focusable="false" class="octicon octicon-file" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 1.75z"></path></svg>
+            </div>
+            <span class="prc-TreeView-TreeViewItemContentText-smZM-"><span>Dockerfile</span></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- 3 · Pull request file tree -->
+    <file-tree>
+      <ul class="ActionList">
+        <li class="ActionList-item ActionList-item--subItem js-tree-node" data-tree-entry-type="directory">
+          <span class="ActionList-content">
+            <span class="ActionList-item-visual ActionList-item-visual--leading"><svg aria-hidden="true" class="octicon octicon-file-directory-open-fill" viewBox="0 0 16 16" width="16" height="16"><path d="M0 0z"></path></svg></span>
+            <span class="ActionList-item-label">tests</span>
+          </span>
+        </li>
+        <li class="ActionList-item ActionList-item--subItem js-tree-node" data-tree-entry-type="file">
+          <span class="ActionList-content">
+            <span class="ActionList-item-visual ActionList-item-visual--leading"><svg aria-hidden="true" class="octicon octicon-file" viewBox="0 0 16 16" width="16" height="16"><path d="M0 0z"></path></svg></span>
+            <span class="ActionList-item-label">utils.test.ts</span>
+          </span>
+        </li>
+      </ul>
+    </file-tree>
+
+    <!-- 4 · Legacy Box-row grid -->
+    <div role="grid" class="js-navigation-container">
+      <div role="row" class="Box-row js-navigation-item">
+        <div role="gridcell"><svg aria-label="Directory" class="octicon octicon-file-directory" viewBox="0 0 16 16" width="16" height="16"><path d="M0 0z"></path></svg></div>
+        <div role="rowheader"><span><a class="js-navigation-open Link--primary" title="node_modules" href="#">node_modules</a></span></div>
+      </div>
+      <div role="row" class="Box-row js-navigation-item">
+        <div role="gridcell"><svg aria-label="File" class="octicon octicon-file" viewBox="0 0 16 16" width="16" height="16"><path d="M0 0z"></path></svg></div>
+        <div role="rowheader"><span><a class="js-navigation-open Link--primary" title="go.mod" href="#">go.mod</a></span></div>
+      </div>
+    </div>
+  </body>
+</html>

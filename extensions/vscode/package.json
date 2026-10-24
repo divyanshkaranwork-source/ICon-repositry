@@ -1,0 +1,80 @@
+{
+  "name": "lumora-icons",
+  "displayName": "Lumora Icons",
+  "description": "A premium, abstract icon theme: luminous glass tiles, obsidian noir, porcelain frost, airy halo and champagne gilded editions — 330+ file icons, 190+ folder themes, plus the Lumora Midnight & Daybreak color themes.",
+  "version": "1.0.0",
+  "publisher": "lumora",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#0e0f1a",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "icons",
+    "icon theme",
+    "file icons",
+    "folder icons",
+    "premium",
+    "gradient",
+    "glass",
+    "minimal",
+    "material",
+    "color theme"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/divyanshkaranwork-source/ICon-repositry"
+  },
+  "bugs": {
+    "url": "https://github.com/divyanshkaranwork-source/ICon-repositry/issues"
+  },
+  "homepage": "https://github.com/divyanshkaranwork-source/ICon-repositry#readme",
+  "contributes": {
+    "iconThemes": [
+      {
+        "id": "lumora-aurora",
+        "label": "Lumora Aurora",
+        "path": "./themes/lumora-aurora.json"
+      },
+      {
+        "id": "lumora-noir",
+        "label": "Lumora Noir",
+        "path": "./themes/lumora-noir.json"
+      },
+      {
+        "id": "lumora-frost",
+        "label": "Lumora Frost",
+        "path": "./themes/lumora-frost.json"
+      },
+      {
+        "id": "lumora-halo",
+        "label": "Lumora Halo",
+        "path": "./themes/lumora-halo.json"
+      },
+      {
+        "id": "lumora-gilded",
+        "label": "Lumora Gilded",
+        "path": "./themes/lumora-gilded.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Lumora Midnight",
+        "uiTheme": "vs-dark",
+        "path": "./themes/lumora-midnight-color-theme.json"
+      },
+      {
+        "label": "Lumora Daybreak",
+        "uiTheme": "vs",
+        "path": "./themes/lumora-daybreak-color-theme.json"
+      }
+    ]
+  }
+}
