@@ -11,12 +11,12 @@ import { buildManifest, resolveFile, resolveFolder } from '../src/core/manifest.
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const VSCODE = path.join(ROOT, 'extensions/vscode');
-const theme = (id) => JSON.parse(fs.readFileSync(path.join(VSCODE, 'themes', `lumora-${id}.json`), 'utf8'));
+const theme = (id) => JSON.parse(fs.readFileSync(path.join(VSCODE, 'themes', `folio-${id}.json`), 'utf8'));
 
 test('package.json contributes every edition and both color themes', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(VSCODE, 'package.json'), 'utf8'));
-  assert.deepEqual(pkg.contributes.iconThemes.map((t) => t.id), EDITION_IDS.map((e) => `lumora-${e}`));
-  assert.deepEqual(pkg.contributes.themes.map((t) => t.label), ['Lumora Midnight', 'Lumora Daybreak']);
+  assert.deepEqual(pkg.contributes.iconThemes.map((t) => t.id), EDITION_IDS.map((e) => `folio-${e}`));
+  assert.deepEqual(pkg.contributes.themes.map((t) => t.label), ['Folio Dark', 'Folio Light']);
   for (const t of [...pkg.contributes.iconThemes, ...pkg.contributes.themes]) {
     assert.ok(fs.existsSync(path.join(VSCODE, t.path)), t.path);
   }
@@ -30,7 +30,8 @@ for (const edition of EDITION_IDS) {
     for (const [key, { iconPath }] of defs) {
       const file = path.resolve(VSCODE, 'themes', iconPath);
       const svg = fs.readFileSync(file, 'utf8');
-      assert.match(svg, /^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" viewBox="0 0 32 32">.*<\/svg>$/s, key);
+      assert.match(svg, /^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" viewBox="0 0 16 16">.*<\/svg>$/s, key);
+      assert.doesNotMatch(svg, /Gradient|filter|opacity/, `${key} must stay flat`);
       assert.doesNotMatch(svg, /NaN|undefined|Infinity/, key);
     }
     for (const section of [t, t.light].filter(Boolean)) {
@@ -41,13 +42,12 @@ for (const edition of EDITION_IDS) {
   });
 }
 
-test('glyph-only editions ship a light-theme set', () => {
-  for (const id of ['halo', 'gilded']) assert.ok(theme(id).light?.fileExtensions?.ts);
-  for (const id of ['aurora', 'noir', 'frost']) assert.equal(theme(id).light, undefined);
+test('every edition ships a light-theme set', () => {
+  for (const id of EDITION_IDS) assert.ok(theme(id).light?.fileExtensions?.ts, id);
 });
 
 test('maps common names the way developers expect', () => {
-  const t = theme('aurora');
+  const t = theme('ink');
   assert.equal(t.fileExtensions.ts, '_f_typescript');
   assert.equal(t.fileExtensions['test.tsx'], '_f_test-tsx');
   assert.equal(t.fileNames['package.json'], '_f_npm');

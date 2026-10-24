@@ -7,7 +7,7 @@ import { resolveFile, resolveFolder } from '../core/resolve.js';
 
 export { EDITIONS };
 
-export function createLumora(data) {
+export function createFolio(data) {
   const renderer = createRenderer(data.glyphs);
   const files = new Map(data.files.map((d) => [d.id, d]));
   const folders = new Map(data.folders.map((d) => [d.id, d]));
@@ -30,10 +30,10 @@ export function createLumora(data) {
     fileIconId: (name) => resolveFile(data, name),
     folderIconId: (name) => resolveFolder(data, name),
 
-    fileSvgById(id, edition = 'aurora', mode = 'dark') {
+    fileSvgById(id, edition = 'ink', mode = 'dark') {
       return memo(`f|${id}|${edition}|${mode}`, () => renderer.file(files.get(id) || files.get(data.defaults.file), edition, mode));
     },
-    folderSvgById(id, { edition = 'aurora', mode = 'dark', open = false } = {}) {
+    folderSvgById(id, { edition = 'ink', mode = 'dark', open = false } = {}) {
       return memo(`d|${id}|${edition}|${mode}|${open}`, () =>
         renderer.folder(folders.get(id) || folders.get(data.defaults.folder), edition, { open, mode }),
       );

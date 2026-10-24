@@ -1,35 +1,32 @@
-# Lumora Icons
+# Folio Icons
 
-**Icons, cut like light.** Lumora is a premium, abstract icon theme for VS Code: one hand-drawn glyph
-library rendered in five materials, from luminous glass to champagne gold.
+File and folder icons drawn as solid pictograms on a 16-pixel grid. Flat shapes, detail cut out as negative space,
+color from a fixed set of twelve muted inks.
 
-![Lumora editions](https://raw.githubusercontent.com/divyanshkaranwork-source/ICon-repositry/claude/optimistic-wright-ibvcji/assets/preview-editions.png)
+![Folio editions](https://raw.githubusercontent.com/divyanshkaranwork-source/ICon-repositry/claude/optimistic-wright-ibvcji/assets/preview-editions.png)
 
 ## Editions
 
-| Edition | Character |
+| Icon theme | |
 | --- | --- |
-| **Lumora Aurora** | Luminous gradient glass tiles with a folded "folio" corner — the signature look |
-| **Lumora Noir** | Obsidian tiles with neon rims and glowing glyphs |
-| **Lumora Frost** | Porcelain pastel tiles with deep ink — made for light themes |
-| **Lumora Halo** | Airy gradient glyphs floating on a soft tinted halo (dedicated light-theme set) |
-| **Lumora Gilded** | Champagne-gold monochrome glyphs — quiet luxury (dedicated light-theme set) |
+| **Folio Ink** | Twelve muted inks; related files share a hue |
+| **Folio Graphite** | Monochrome; shape does all the work |
+| **Folio Primary** | Red, blue and yellow, after Bauhaus posters |
 
-Switch with **Preferences: File Icon Theme** (`Ctrl/Cmd + K`, `Ctrl/Cmd + T` opens color themes).
+Each edition ships a dark and a light set, and VS Code switches between them with your color theme.
+Choose one with **Preferences: File Icon Theme**.
 
-## What's inside
+## Contents
 
-- **388 file icons** — languages, frameworks, configs, docs, media, infra, CI/CD and more.
-- **201 folder themes** with distinct emblems, each with an open state (a sheet of paper peeks out).
-- **1,200+ file names, 1,100+ extensions, 6,600+ folder names** — including `.name`, `_name` and `__name__` variants.
-- Thoughtful details: Next.js route files (`page.tsx`, `layout.tsx`, `loading.tsx`…), test files tinted by language,
-  config badges (`tsconfig.json`, `vite.config.ts`), lockfile badges, and AI-agent files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`).
-- **Lumora Midnight** and **Lumora Daybreak** color themes tuned to sit behind the icons.
+- 388 file icons and 201 folder icons, each folder with an open state.
+- 1,200+ file names, 1,100+ extensions and 6,600+ folder names, including `.name`, `_name` and `__name__` variants.
+- Config badges (`tsconfig.json`, `vite.config.ts`), lock badges (`package-lock.json`, `Cargo.lock`), test files in
+  their language's hue, Next.js route files, and agent files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`).
+- **Folio Dark** and **Folio Light** color themes: warm paper and ink with one vermilion accent.
 
-Every color is computed in OKLCH so hues keep the same perceptual weight across the whole set.
-Monograms are set in Unbounded and converted to outlines, so icons never depend on installed fonts.
+Language monograms are set in IBM Plex Sans Condensed and converted to outlines.
 
 ## Also for GitHub
 
-The same icons are available in Chrome, Edge, Brave and Arc through the Lumora browser extension —
-see the [project repository](https://github.com/divyanshkaranwork-source/ICon-repositry).
+The same icons are available for GitHub in Chrome, Edge, Brave and Arc. See the
+[repository](https://github.com/divyanshkaranwork-source/ICon-repositry).

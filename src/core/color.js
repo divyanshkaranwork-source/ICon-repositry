@@ -1,5 +1,5 @@
 // OKLCH → sRGB hex, with chroma reduction to stay inside the sRGB gamut.
-// Every Lumora color is defined perceptually so that hues sit at the same
+// Every Folio color is defined perceptually so that hues sit at the same
 // visual weight no matter where they live on the wheel.
 
 function oklabToLinear(L, a, b) {

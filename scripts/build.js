@@ -1,4 +1,4 @@
-// Lumora build: renders every icon for every edition, writes the VS Code icon
+// Folio build: renders every icon for every edition, writes the VS Code icon
 // themes + color themes, and bundles the browser runtime for the Chrome
 // extension and the preview gallery.
 //
@@ -24,13 +24,16 @@ const DOCS = path.join(ROOT, 'docs');
 const GEN = path.join(ROOT, 'build');
 
 const require = createRequire(import.meta.url);
-const FONT = require.resolve('@fontsource/unbounded/files/unbounded-latin-700-normal.woff2');
+const FONTS = {
+  'plex-sans-400.woff2': '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2',
+  'plex-sans-500.woff2': '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2',
+  'plex-sans-600.woff2': '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2',
+  'plex-mono-400.woff2': '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2',
+  'plex-mono-500.woff2': '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2',
+};
 const args = new Set(process.argv.slice(2));
 const doVscode = !args.has('--web');
 const doWeb = !args.has('--vscode');
-
-// Editions whose glyphs float on the background need a darker light-theme set.
-const LIGHT_VARIANTS = new Set(['halo', 'gilded']);
 
 const write = (file, content) => {
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -42,7 +45,7 @@ const t0 = Date.now();
 const data = loadData();
 const { table, files, folders, manifest } = data;
 const render = createRenderer(table);
-console.log(`◆ ${files.length} file icons · ${folders.length} folder themes · ${Object.keys(table).length} glyphs`);
+console.log(`${files.length} file icons, ${folders.length} folder icons, ${Object.keys(table).length} glyphs`);
 
 // ─── Runtime data (shared by Chrome + gallery) ─────────────────────
 const runtime = runtimeData(data);
@@ -101,19 +104,18 @@ if (doVscode) {
     total += renderSet(ed.id, 'dark', path.join(VSCODE, 'icons', ed.id));
     const main = themeSection('', `../icons/${ed.id}`);
     const theme = { iconDefinitions: { ...main.defs }, ...main.section, hidesExplorerArrows: false };
-    if (LIGHT_VARIANTS.has(ed.id)) {
-      total += renderSet(ed.id, 'light', path.join(VSCODE, 'icons', `${ed.id}-light`));
-      const light = themeSection('l', `../icons/${ed.id}-light`);
-      Object.assign(theme.iconDefinitions, light.defs);
-      theme.light = light.section;
-    }
-    write(path.join(VSCODE, 'themes', `lumora-${ed.id}.json`), JSON.stringify(theme));
-    contributes.iconThemes.push({ id: `lumora-${ed.id}`, label: `Lumora ${ed.name}`, path: `./themes/lumora-${ed.id}.json` });
+    // Flat colors are tuned per background, so every edition ships a light-theme set.
+    total += renderSet(ed.id, 'light', path.join(VSCODE, 'icons', `${ed.id}-light`));
+    const light = themeSection('l', `../icons/${ed.id}-light`);
+    Object.assign(theme.iconDefinitions, light.defs);
+    theme.light = light.section;
+    write(path.join(VSCODE, 'themes', `folio-${ed.id}.json`), JSON.stringify(theme));
+    contributes.iconThemes.push({ id: `folio-${ed.id}`, label: `Folio ${ed.name}`, path: `./themes/folio-${ed.id}.json` });
   }
 
   for (const ct of buildColorThemes()) {
-    write(path.join(VSCODE, 'themes', `lumora-${ct.key}-color-theme.json`), JSON.stringify(ct.json, null, 2));
-    contributes.themes.push({ label: ct.label, uiTheme: ct.uiTheme, path: `./themes/lumora-${ct.key}-color-theme.json` });
+    write(path.join(VSCODE, 'themes', `folio-${ct.key}-color-theme.json`), JSON.stringify(ct.json, null, 2));
+    contributes.themes.push({ label: ct.label, uiTheme: ct.uiTheme, path: `./themes/folio-${ct.key}-color-theme.json` });
   }
 
   // Keep package.json contributions in sync with the editions.
@@ -121,7 +123,7 @@ if (doVscode) {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   pkg.contributes = { ...pkg.contributes, ...contributes };
   write(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
-  console.log(`◆ VS Code: ${total} SVGs across ${EDITIONS.length} editions (+ light sets) and ${contributes.themes.length} color themes`);
+  console.log(`VS Code: ${total} SVGs across ${EDITIONS.length} editions (dark + light) and ${contributes.themes.length} color themes`);
 }
 
 // ─── Chrome extension + gallery ──────────────────────────────────
@@ -133,7 +135,7 @@ if (doWeb) {
     legalComments: 'none',
     charset: 'utf8',
     logLevel: 'warning',
-    alias: { '@lumora/data': path.join(GEN, 'runtime-data.json') },
+    alias: { '@folio/data': path.join(GEN, 'runtime-data.json') },
   };
   rm(path.join(CHROME, 'dist'));
   await esbuild.build({
@@ -159,10 +161,11 @@ if (doWeb) {
   write(path.join(DOCS, 'favicon.svg'), brandSvg());
   write(path.join(CHROME, 'icons/mark.svg'), brandSvg());
   for (const dir of [path.join(CHROME, 'fonts'), path.join(CHROME, 'dist/fonts'), path.join(DOCS, 'fonts')]) {
+    rm(dir);
     fs.mkdirSync(dir, { recursive: true });
-    fs.copyFileSync(FONT, path.join(dir, 'unbounded-700.woff2'));
+    for (const [name, mod] of Object.entries(FONTS)) fs.copyFileSync(require.resolve(mod), path.join(dir, name));
   }
-  console.log('◆ Chrome extension + gallery bundled');
+  console.log('Chrome extension + gallery bundled');
 }
 
-console.log(`✦ Done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
+console.log(`Done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);

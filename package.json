@@ -1,17 +1,18 @@
 {
-  "name": "lumora-icons-monorepo",
+  "name": "folio-icons-monorepo",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "devDependencies": {
-    "@expo-google-fonts/unbounded": "^0.4.1",
-    "@fontsource/unbounded": "^5.3.0",
+    "@expo-google-fonts/ibm-plex-sans-condensed": "^0.4.1",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "@vscode/vsce": "^4.0.0",
     "esbuild": "^0.28.2",
     "opentype.js": "^2.0.0",
     "playwright": "1.63.0"
   },
-  "description": "Lumora — premium, abstract file & folder icons for VS Code and GitHub (Chrome).",
+  "description": "Folio: file and folder icons for VS Code and GitHub.",
   "scripts": {
     "build": "node scripts/build.js",
     "build:vscode": "node scripts/build.js --vscode",

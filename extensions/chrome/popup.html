@@ -3,49 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lumora</title>
+    <title>Folio</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-    <main class="shell">
-      <header class="top">
-        <img class="mark" src="icons/mark.svg" alt="" width="40" height="40" />
-        <div class="brand">
-          <h1>Lumora</h1>
-          <p>Premium icons for GitHub</p>
-        </div>
-        <label class="power" title="Enable Lumora on GitHub">
+    <main class="sheet">
+      <header class="head">
+        <div class="wordmark"><img src="icons/mark.svg" alt="" width="20" height="20" /><span>Folio</span></div>
+        <label class="power">
           <input type="checkbox" id="enabled" />
-          <span class="power-track"><span class="power-knob"></span></span>
+          <span class="track" aria-hidden="true"></span>
+          <span class="power-label" id="power-label">On</span>
         </label>
       </header>
+      <p class="lede">File and folder icons for GitHub.</p>
 
-      <section class="block">
+      <section>
         <h2>Edition</h2>
         <div class="editions" id="editions" role="radiogroup" aria-label="Edition"></div>
       </section>
 
-      <section class="block options">
+      <section>
+        <h2>Options</h2>
         <label class="row">
-          <span><b>Folder icons</b><small>Themed directories with emblems</small></span>
-          <input type="checkbox" id="folders" class="switch" />
-        </label>
-        <label class="row">
-          <span><b>Hover motion</b><small>A subtle lift as you browse</small></span>
-          <input type="checkbox" id="hover" class="switch" />
+          <span>Folder icons</span>
+          <input type="checkbox" id="folders" class="check" />
         </label>
         <div class="row">
-          <span><b>Appearance</b><small>Matches GitHub when on Auto</small></span>
-          <div class="segmented" id="mode" role="radiogroup" aria-label="Appearance">
+          <span>Appearance</span>
+          <div class="seg" id="mode" role="radiogroup" aria-label="Appearance">
             <button data-mode="auto">Auto</button><button data-mode="dark">Dark</button><button data-mode="light">Light</button>
           </div>
         </div>
       </section>
 
       <footer class="foot">
-        <a href="dist/gallery.html" target="_blank" class="gallery-link">Explore the gallery <span aria-hidden="true">↗</span></a>
-        <span class="ver" id="version"></span>
+        <a href="dist/gallery.html" target="_blank">Index of all icons&ensp;→</a>
+        <span id="version"></span>
       </footer>
     </main>
     <script src="dist/popup.js"></script>

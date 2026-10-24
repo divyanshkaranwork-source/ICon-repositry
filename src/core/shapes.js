@@ -1,4 +1,4 @@
-// Geometry helpers that emit compact SVG path data on Lumora's 24-unit glyph grid.
+// Geometry helpers that emit compact SVG path data on Folio's 16-unit glyph grid.
 
 const n = (v) => +(+v).toFixed(2);
 

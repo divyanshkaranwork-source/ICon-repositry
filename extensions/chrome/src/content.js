@@ -1,14 +1,14 @@
-// Lumora for GitHub — replaces file and folder octicons with Lumora icons.
+// Folio for GitHub — replaces file and folder octicons with Folio icons.
 //
 // Strategy: never add or remove DOM nodes that GitHub's React tree owns.
-// Instead we paint the Lumora icon as the background of the existing octicon
+// Instead we paint the Folio icon as the background of the existing octicon
 // <svg> and hide its paths. React can re-render freely; we simply repaint.
 
-import data from '@lumora/data';
-import { createLumora } from '../../../src/runtime/lumora.js';
+import data from '@folio/data';
+import { createFolio } from '../../../src/runtime/folio.js';
 import { DEFAULTS, loadSettings, onSettingsChanged } from './settings.js';
 
-const lumora = createLumora(data);
+const folio = createFolio(data);
 let settings = { ...DEFAULTS };
 let scheduled = false;
 
@@ -60,21 +60,15 @@ const NAME_SELECTOR = [
 ].join(',');
 
 // ─── Styles ─────────────────────────────────────────────────────────
-const STYLE_ID = 'lumora-style';
+const STYLE_ID = 'folio-style';
 function injectStyle() {
   if (document.getElementById(STYLE_ID)) return;
   const style = document.createElement('style');
   style.id = STYLE_ID;
   style.textContent = `
-    svg[data-lumora] { background-position: center !important; background-repeat: no-repeat !important;
-      background-size: contain !important; fill: transparent !important; color: transparent !important;
-      transition: transform .18s cubic-bezier(.2,.8,.2,1), filter .18s ease; overflow: visible !important; }
-    svg[data-lumora] > * { visibility: hidden !important; }
-    html[data-lumora-hover] [role="treeitem"]:hover > div svg[data-lumora],
-    html[data-lumora-hover] tr.react-directory-row:hover svg[data-lumora],
-    html[data-lumora-hover] li.ActionList-item:hover svg[data-lumora],
-    html[data-lumora-hover] .Box-row:hover svg[data-lumora] {
-      transform: scale(1.14) rotate(-3deg); filter: drop-shadow(0 2px 4px rgba(120, 90, 255, .35)); }
+    svg[data-folio] { background-position: center !important; background-repeat: no-repeat !important;
+      background-size: contain !important; fill: transparent !important; color: transparent !important; }
+    svg[data-folio] > * { visibility: hidden !important; }
   `;
   (document.head || document.documentElement).appendChild(style);
 }
@@ -138,18 +132,18 @@ function paint(svg) {
   const mode = pageMode();
   const key = `${settings.edition}|${mode}|${isDir ? 'd' : 'f'}|${open ? 1 : 0}|${name}`;
   // Re-check the background too: React may rewrite the style attribute wholesale.
-  if (svg.dataset.lumora === key && svg.style.backgroundImage) return;
+  if (svg.dataset.folio === key && svg.style.backgroundImage) return;
   const uri = isDir
-    ? lumora.folderUri(name, { edition: settings.edition, mode, open })
-    : lumora.fileUri(name, settings.edition, mode);
+    ? folio.folderUri(name, { edition: settings.edition, mode, open })
+    : folio.fileUri(name, settings.edition, mode);
   svg.style.setProperty('background-image', `url("${uri}")`, 'important');
-  svg.dataset.lumora = key;
+  svg.dataset.folio = key;
 }
 
 function unpaint(svg) {
-  if (!svg.dataset.lumora) return;
+  if (!svg.dataset.folio) return;
   svg.style.removeProperty('background-image');
-  delete svg.dataset.lumora;
+  delete svg.dataset.folio;
 }
 
 function scan() {
@@ -165,7 +159,7 @@ function scan() {
       paint(svg);
     } catch (err) {
       // One odd node must never break the page.
-      console.debug('[lumora]', err);
+      console.debug('[folio]', err);
     }
   });
 }
@@ -174,10 +168,6 @@ function schedule() {
   if (scheduled) return;
   scheduled = true;
   requestAnimationFrame(scan);
-}
-
-function applyHover() {
-  document.documentElement.toggleAttribute('data-lumora-hover', settings.enabled && settings.hover);
 }
 
 // ─── Boot ────────────────────────────────────────────────────────
@@ -190,7 +180,7 @@ function relevant(m) {
     case 'data-color-mode':
       return true;
     case 'style':
-      return t.nodeName.toLowerCase() === 'svg' && 'lumora' in t.dataset && !t.style.backgroundImage;
+      return t.nodeName.toLowerCase() === 'svg' && 'folio' in t.dataset && !t.style.backgroundImage;
     default:
       return t.nodeName.toLowerCase() === 'svg';
   }
@@ -211,12 +201,10 @@ document.addEventListener('pjax:end', schedule);
 
 loadSettings().then((s) => {
   settings = s;
-  applyHover();
   schedule();
 });
 onSettingsChanged((s) => {
   settings = s;
-  applyHover();
-  document.querySelectorAll('svg[data-lumora]').forEach((svg) => delete svg.dataset.lumora);
+  document.querySelectorAll('svg[data-folio]').forEach((svg) => delete svg.dataset.folio);
   schedule();
 });

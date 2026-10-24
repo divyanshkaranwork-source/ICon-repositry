@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Lumora contributors
+Copyright (c) 2026 Folio contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,5 +22,6 @@ SOFTWARE.
 
 ---
 
-Monogram glyphs are outlines derived from the Unbounded typeface
-(https://github.com/w3f/unbounded), licensed under the SIL Open Font License 1.1.
+Monogram glyphs are outlines derived from IBM Plex Sans Condensed, and the
+gallery and popup use IBM Plex Sans and IBM Plex Mono
+(https://github.com/IBM/plex), all licensed under the SIL Open Font License 1.1.

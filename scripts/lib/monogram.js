@@ -1,5 +1,5 @@
-// Compiles short monograms ("TS", "Py", "C#") into vector paths on the 24-unit
-// glyph grid using the Unbounded typeface, so icons never depend on fonts
+// Compiles short monograms ("TS", "PY", "C#") into vector paths on the 16-unit
+// glyph grid using IBM Plex Sans Condensed Bold, so icons never depend on fonts
 // installed on the viewer's machine.
 
 import fs from 'node:fs';
@@ -7,7 +7,7 @@ import { createRequire } from 'node:module';
 import opentype from 'opentype.js';
 
 const require = createRequire(import.meta.url);
-const FONT_FILE = require.resolve('@expo-google-fonts/unbounded/700Bold/Unbounded_700Bold.ttf');
+const FONT_FILE = require.resolve('@expo-google-fonts/ibm-plex-sans-condensed/700Bold/IBMPlexSansCondensed_700Bold.ttf');
 
 let font;
 function loadFont() {
@@ -18,22 +18,22 @@ function loadFont() {
   return font;
 }
 
-// Max box (w, h) on the 24 grid by character count.
-const BOX = { 1: [15, 15], 2: [21, 12.6], 3: [22, 10.6], 4: [22.4, 8.8] };
+// Max box (w, h) on the 16 grid by character count. Cap height drives the size,
+// so one- and two-letter marks share the same optical weight.
+const BOX = { 1: [12, 10.6], 2: [15, 10], 3: [15.6, 8] };
 
 function layout(text) {
   const f = loadFont();
-  const size = 100;
-  const scale = size / f.unitsPerEm;
+  const scale = 100 / f.unitsPerEm;
   const cmds = [];
   let x = 0;
   let prev = null;
   for (const ch of text) {
     const g = f.charToGlyph(ch);
     if (prev) x += (f.getKerningValue(prev, g) || 0) * scale;
-    // Letter-spacing tuned for tiny sizes: open the counters slightly.
-    cmds.push(...g.getPath(x, 0, size).commands);
-    x += g.advanceWidth * scale + (text.length > 1 ? 2.5 : 0);
+    cmds.push(...g.getPath(x, 0, 100).commands);
+    // A touch of tracking keeps counters open at 16px.
+    x += g.advanceWidth * scale + 3;
     prev = g;
   }
   return cmds;
@@ -54,16 +54,16 @@ function bbox(cmds) {
   return { x1, y1, x2, y2 };
 }
 
-/** @returns {string} SVG path data on the 24 grid, centered at (12, 12). */
+/** @returns {string} SVG path data on the 16 grid, centered at (8, 8). */
 export function monogramPath(text) {
   const cmds = layout(text);
   const bb = bbox(cmds);
   const w = bb.x2 - bb.x1;
   const h = bb.y2 - bb.y1;
-  const [mw, mh] = BOX[Math.min(4, [...text].length)];
+  const [mw, mh] = BOX[Math.min(3, [...text].length)];
   const k = Math.min(mw / w, mh / h);
-  const tx = 12 - (bb.x1 + w / 2) * k;
-  const ty = 12 - (bb.y1 + h / 2) * k;
+  const tx = 8 - (bb.x1 + w / 2) * k;
+  const ty = 8 - (bb.y1 + h / 2) * k;
   const X = (v) => +(v * k + tx).toFixed(2);
   const Y = (v) => +(v * k + ty).toFixed(2);
   return cmds
@@ -86,6 +86,9 @@ export function monogramPath(text) {
 /** Build the full glyph table: hand-drawn glyphs + compiled monograms. */
 export function buildGlyphTable(glyphs, monograms) {
   const table = { ...glyphs };
-  for (const text of monograms) table[`mono:${text}`] = [['f', monogramPath(text), {}]];
+  for (const text of monograms) {
+    if ([...text].length > 3) throw new Error(`Monogram "${text}" is longer than 3 characters`);
+    table[`mono:${text}`] = [['f', monogramPath(text), {}]];
+  }
   return table;
 }

@@ -1,14 +1,14 @@
-// Lumora gallery — the interactive atelier used for GitHub Pages and as the
+// Folio icon index — the specimen page used for GitHub Pages and as the
 // Chrome extension's options page.
 
-import data from '@lumora/data';
-import { createLumora } from '../runtime/lumora.js';
+import data from '@folio/data';
+import { createFolio } from '../runtime/folio.js';
 import { brandSvg } from '../core/brand.js';
 import { loadSettings, saveSettings } from '../../extensions/chrome/src/settings.js';
 
-const lumora = createLumora(data);
+const folio = createFolio(data);
 const $ = (id) => document.getElementById(id);
-const state = { edition: 'aurora', canvas: 'dark', tab: 'files', q: '' };
+const state = { edition: 'ink', canvas: 'light', tab: 'files', q: '' };
 
 // ─── Association index (id → names) ──────────────────────────────
 const fileAssoc = new Map(data.files.map((f) => [f.id, []]));
@@ -41,7 +41,7 @@ const pretty = (id) =>
 
 // ─── Sample explorer tree ────────────────────────────────────────
 const TREE = [
-  ['root', 'lumora-app', 0, true],
+  ['root', 'my-app', 0, true],
   ['dir', '.github', 1, true],
   ['dir', 'workflows', 2, false],
   ['dir', '.vscode', 1, false],
@@ -88,8 +88,8 @@ const SPOTLIGHT = [
 ];
 
 const mode = () => state.canvas;
-const fileImg = (name) => lumora.fileUri(name, state.edition, mode());
-const folderImg = (name, open, root) => lumora.folderUri(name, { edition: state.edition, mode: mode(), open, root });
+const fileImg = (name) => folio.fileUri(name, state.edition, mode());
+const folderImg = (name, open, root) => folio.folderUri(name, { edition: state.edition, mode: mode(), open, root });
 
 function img(src, size, alt = '') {
   const el = document.createElement('img');
@@ -127,10 +127,10 @@ function renderSpotlight() {
     const src = kind === 'file' ? fileImg(name) : folderImg(name, !!open);
     const cap = document.createElement('figcaption');
     cap.textContent = name;
-    fig.append(img(src, 56, name), cap);
+    fig.append(img(src, 48, name), cap);
     host.append(fig);
   }
-  const ed = lumora.editions.find((e) => e.id === state.edition);
+  const ed = folio.editions.find((e) => e.id === state.edition);
   $('edition-name').textContent = ed.name;
   $('edition-tag').textContent = ed.tagline;
 }
@@ -144,29 +144,26 @@ function renderGrid() {
   const assoc = isFiles ? fileAssoc : folderAssoc;
   let shown = 0;
   const frag = document.createDocumentFragment();
-  for (const def of list) {
+  list.forEach((def, i) => {
     const names = assoc.get(def.id) || [];
-    if (q && !def.id.includes(q) && !names.some((n) => n.includes(q))) continue;
+    if (q && !def.id.includes(q) && !names.some((n) => n.includes(q))) return;
     shown++;
-    const card = document.createElement('article');
-    card.className = 'card';
+    const cell = document.createElement('article');
+    cell.className = 'cell';
     const src = isFiles
-      ? lumora.uriFor(lumora.fileSvgById(def.id, state.edition, mode()))
-      : lumora.uriFor(lumora.folderSvgById(def.id, { edition: state.edition, mode: mode() }));
+      ? folio.uriFor(folio.fileSvgById(def.id, state.edition, mode()))
+      : folio.uriFor(folio.folderSvgById(def.id, { edition: state.edition, mode: mode() }));
+    const no = document.createElement('span');
+    no.className = 'no';
+    no.textContent = String(i + 1).padStart(3, '0');
     const h = document.createElement('h4');
     h.textContent = pretty(def.id);
     const p = document.createElement('p');
-    const sample = names.slice(0, 3).join('  ');
-    p.textContent = sample || (isFiles ? 'default' : 'any folder');
-    card.title = names.length ? names.join(', ') : pretty(def.id);
-    card.append(img(src, 44, pretty(def.id)), h, p);
-    if (!isFiles) {
-      const openImg = img(lumora.uriFor(lumora.folderSvgById(def.id, { edition: state.edition, mode: mode(), open: true })), 22, '');
-      openImg.className = 'open-peek';
-      card.append(openImg);
-    }
-    frag.append(card);
-  }
+    p.textContent = names.slice(0, 3).join(' ') || (isFiles ? 'default' : 'any folder');
+    cell.title = names.length ? names.join(', ') : pretty(def.id);
+    cell.append(no, img(src, 32, pretty(def.id)), h, p);
+    frag.append(cell);
+  });
   host.append(frag);
   $('empty').hidden = shown > 0;
 }
@@ -174,17 +171,11 @@ function renderGrid() {
 function renderEditions() {
   const host = $('editions');
   host.textContent = '';
-  for (const ed of lumora.editions) {
+  for (const ed of folio.editions) {
     const b = document.createElement('button');
     b.setAttribute('role', 'radio');
     b.setAttribute('aria-checked', String(ed.id === state.edition));
-    b.className = 'chip';
-    const sw = document.createElement('span');
-    sw.className = 'swatch';
-    sw.style.background = `linear-gradient(135deg, ${ed.swatch.join(',')})`;
-    const label = document.createElement('span');
-    label.textContent = ed.name;
-    b.append(sw, label);
+    b.textContent = ed.name;
     b.addEventListener('click', () => {
       state.edition = ed.id;
       saveSettings({ edition: ed.id });
@@ -215,7 +206,7 @@ function renderAll() {
 
   const s = await loadSettings();
   state.edition = s.edition;
-  state.canvas = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  state.canvas = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
   for (const b of $('canvas').querySelectorAll('button')) {
     b.addEventListener('click', () => {

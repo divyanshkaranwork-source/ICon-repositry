@@ -11,7 +11,7 @@ import { buildGlyphTable } from '../lib/monogram.js';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const out = process.argv[2];
-const monos = ['TS', 'JS', 'Py', 'Rs', 'Go', 'C#', 'PHP', 'Kt'];
+const monos = ['TS', 'JS', 'PY', 'RS', 'GO', 'C#', 'PHP', 'KT'];
 const table = buildGlyphTable(glyphs, monos);
 const r = createRenderer(table);
 const uri = (s) => 'data:image/svg+xml;utf8,' + encodeURIComponent(s);

@@ -1,4 +1,4 @@
-// Renders the Lumora mark to PNG for the Chrome toolbar and the VS Code
+// Renders the Folio mark to PNG for the Chrome toolbar and the VS Code
 // marketplace. Needs Playwright's Chromium (run once; PNGs are committed).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -30,6 +30,6 @@ for (const [rel, size] of targets) {
   const out = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   await page.screenshot({ path: out, omitBackground: true, clip: { x: 0, y: 0, width: size, height: size } });
-  console.log('✦', rel);
+  console.log(rel);
 }
 await browser.close();

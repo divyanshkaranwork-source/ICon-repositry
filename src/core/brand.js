@@ -1,24 +1,18 @@
-// The Lumora mark: a spectrum glass tile holding a four-point spark.
+// The Folio mark: a sheet of paper with a vermilion folded corner, set on ink.
 
-import { sparkle } from './shapes.js';
+export const BRAND = {
+  ink: '#1b1a17',
+  paper: '#efebe2',
+  vermilion: '#d4553a',
+};
 
-export function brandSvg() {
+export function brandSvg({ tile = true } = {}) {
+  const { ink, paper, vermilion } = BRAND;
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">` +
-    `<defs>` +
-    `<linearGradient id="s" x1="8" y1="6" x2="122" y2="124" gradientUnits="userSpaceOnUse">` +
-    `<stop offset="0" stop-color="#6d7bff"/><stop offset=".42" stop-color="#a75cff"/><stop offset=".76" stop-color="#ff6fae"/><stop offset="1" stop-color="#ffb46b"/></linearGradient>` +
-    `<radialGradient id="g" cx="34" cy="20" r="96" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></radialGradient>` +
-    `<radialGradient id="c" cx="64" cy="64" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>` +
-    `<clipPath id="k"><rect x="6" y="6" width="116" height="116" rx="36"/></clipPath>` +
-    `</defs>` +
-    `<rect x="6" y="6" width="116" height="116" rx="36" fill="url(#s)"/>` +
-    `<rect x="6" y="6" width="116" height="116" rx="36" fill="url(#g)"/>` +
-    `<circle cx="64" cy="64" r="44" fill="url(#c)"/>` +
-    `<rect x="6" y="6" width="116" height="116" rx="36" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="4" clip-path="url(#k)"/>` +
-    `<circle cx="64" cy="64" r="25" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.5"/>` +
-    `<path d="${sparkle(64, 64, 40)}" fill="#fff"/>` +
-    `<path d="${sparkle(95, 33, 10)}" fill="#fff" opacity=".9"/>` +
+    (tile ? `<rect x="4" y="4" width="120" height="120" rx="26" fill="${ink}"/>` : '') +
+    `<path d="M40 26h38l16 16v58a3 3 0 0 1-3 3H40a3 3 0 0 1-3-3V29a3 3 0 0 1 3-3z" fill="${tile ? paper : ink}"/>` +
+    `<path d="M78 26v13a3 3 0 0 0 3 3h13z" fill="${vermilion}"/>` +
     `</svg>`
   );
 }

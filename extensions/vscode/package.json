@@ -1,13 +1,13 @@
 {
-  "name": "lumora-icons",
-  "displayName": "Lumora Icons",
-  "description": "A premium, abstract icon theme: luminous glass tiles, obsidian noir, porcelain frost, airy halo and champagne gilded editions — 330+ file icons, 190+ folder themes, plus the Lumora Midnight & Daybreak color themes.",
+  "name": "folio-icons",
+  "displayName": "Folio Icons",
+  "description": "File and folder icons drawn as solid pictograms on a 16px grid. Three editions (Ink, Graphite, Primary) with dark and light sets, plus Folio Dark and Folio Light color themes.",
   "version": "1.0.0",
-  "publisher": "lumora",
+  "publisher": "folio",
   "license": "MIT",
   "icon": "images/icon.png",
   "galleryBanner": {
-    "color": "#0e0f1a",
+    "color": "#1b1a17",
     "theme": "dark"
   },
   "engines": {
@@ -21,11 +21,10 @@
     "icon theme",
     "file icons",
     "folder icons",
-    "premium",
-    "gradient",
-    "glass",
     "minimal",
-    "material",
+    "flat",
+    "monochrome",
+    "pictogram",
     "color theme"
   ],
   "repository": {
@@ -39,41 +38,31 @@
   "contributes": {
     "iconThemes": [
       {
-        "id": "lumora-aurora",
-        "label": "Lumora Aurora",
-        "path": "./themes/lumora-aurora.json"
+        "id": "folio-ink",
+        "label": "Folio Ink",
+        "path": "./themes/folio-ink.json"
       },
       {
-        "id": "lumora-noir",
-        "label": "Lumora Noir",
-        "path": "./themes/lumora-noir.json"
+        "id": "folio-graphite",
+        "label": "Folio Graphite",
+        "path": "./themes/folio-graphite.json"
       },
       {
-        "id": "lumora-frost",
-        "label": "Lumora Frost",
-        "path": "./themes/lumora-frost.json"
-      },
-      {
-        "id": "lumora-halo",
-        "label": "Lumora Halo",
-        "path": "./themes/lumora-halo.json"
-      },
-      {
-        "id": "lumora-gilded",
-        "label": "Lumora Gilded",
-        "path": "./themes/lumora-gilded.json"
+        "id": "folio-primary",
+        "label": "Folio Primary",
+        "path": "./themes/folio-primary.json"
       }
     ],
     "themes": [
       {
-        "label": "Lumora Midnight",
+        "label": "Folio Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/lumora-midnight-color-theme.json"
+        "path": "./themes/folio-dark-color-theme.json"
       },
       {
-        "label": "Lumora Daybreak",
+        "label": "Folio Light",
         "uiTheme": "vs",
-        "path": "./themes/lumora-daybreak-color-theme.json"
+        "path": "./themes/folio-light-color-theme.json"
       }
     ]
   }

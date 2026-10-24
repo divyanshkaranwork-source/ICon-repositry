@@ -8,8 +8,8 @@ import { buildGlyphTable } from '../lib/monogram.js';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
-const [out, ed = 'aurora', size = '56', start = '0', count = '200', kind = 'file'] = process.argv.slice(2);
-const table = buildGlyphTable(glyphs, ['TS', 'JS', 'Py', 'C#']);
+const [out, ed = 'ink', size = '56', start = '0', count = '200', kind = 'file'] = process.argv.slice(2);
+const table = buildGlyphTable(glyphs, ['TS', 'JS', 'PY', 'C#']);
 const r = createRenderer(table);
 const uri = (s) => 'data:image/svg+xml;utf8,' + encodeURIComponent(s);
 const names = Object.keys(table).slice(+start, +start + +count);

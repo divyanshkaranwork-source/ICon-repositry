@@ -20,5 +20,5 @@ jobs:
       - run: npm run package
       - uses: actions/upload-artifact@v4
         with:
-          name: lumora-release
+          name: folio-release
           path: release/

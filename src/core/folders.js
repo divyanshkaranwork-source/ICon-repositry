@@ -1,12 +1,12 @@
-// Lumora folder themes.
+// Folio folder themes.
 //
 // Each folder theme pairs a hue with an emblem glyph and a list of directory
 // names. Names are expanded at build time with the common decorations
 // (".name", "_name", "__name__") so ".github", "_assets" and "__tests__" all
 // resolve naturally.
 
-export const DEFAULT_FOLDER = { id: 'default', hue: 258, hue2: 290 };
-export const ROOT_FOLDER = { id: 'root', glyph: 'lumora', hue: 268, hue2: 318 };
+export const DEFAULT_FOLDER = { id: 'default', hue: 250, chroma: 0.12 };
+export const ROOT_FOLDER = { id: 'root', glyph: 'root', hue: 250, chroma: 0.12 };
 
 export const FOLDER_ICONS = [
   // ─── Source & architecture ───────────────────────────────────
@@ -55,7 +55,7 @@ export const FOLDER_ICONS = [
   { id: 'target', glyph: 'target', hue: 18, names: ['target', 'targets'] },
   { id: 'release', glyph: 'tag', hue: 332, names: ['release', 'releases', 'versions', 'version', 'tags'] },
   { id: 'public', glyph: 'globe', hue: 200, names: ['public', 'static', 'www', 'wwwroot', 'htdocs', 'public_html', 'webroot'] },
-  { id: 'assets', glyph: 'sparkle', hue: 46, hue2: 25, names: ['assets', 'asset', 'resources', 'resource', 'res', 'media', 'medias', 'gfx', 'graphics', 'artwork', 'art'] },
+  { id: 'assets', glyph: 'gem', hue: 46, names: ['assets', 'asset', 'resources', 'resource', 'res', 'media', 'medias', 'gfx', 'graphics', 'artwork', 'art'] },
   { id: 'images', glyph: 'image', hue: 170, names: ['images', 'image', 'img', 'imgs', 'pictures', 'picture', 'pics', 'photos', 'photo', 'thumbnails', 'thumbs', 'backgrounds', 'wallpapers', 'covers', 'avatars', 'logos', 'brand', 'branding'] },
   { id: 'screenshots', glyph: 'camera', hue: 192, names: ['screenshots', 'screenshot', 'screencasts', 'captures', 'previews', 'preview'] },
   { id: 'icons', glyph: 'star', hue: 52, names: ['icons', 'icon', 'svg', 'svgs', 'sprites', 'sprite', 'emoji', 'emojis', 'favicons', 'glyphs', 'symbols', 'pictograms'] },
@@ -126,7 +126,7 @@ export const FOLDER_ICONS = [
   { id: 'maps', glyph: 'map', hue: 140, names: ['maps', 'map', 'geo', 'geography', 'location', 'locations', 'gis', 'places', 'spatial', 'geojson', 'tiles', 'regions', 'territories'] },
   { id: 'calendar', glyph: 'calendar', hue: 12, names: ['calendar', 'calendars', 'events-calendar', 'bookings', 'booking', 'appointments', 'reservations', 'agenda', 'dates'] },
   { id: 'flags', glyph: 'flag', hue: 8, names: ['flags', 'flag', 'feature-flags', 'featureflags', 'toggles', 'toggle', 'launchdarkly', 'flipper'] },
-  { id: 'features', glyph: 'sparkle', hue: 282, names: ['features', 'feature', 'capabilities', 'verticals'] },
+  { id: 'features', glyph: 'star', hue: 282, names: ['features', 'feature', 'capabilities', 'verticals'] },
   { id: 'experiments', glyph: 'flask', hue: 302, names: ['experiments', 'experiment', 'experimental', 'lab', 'labs', 'research', 'poc', 'pocs', 'prototype', 'prototypes', 'spikes', 'spike', 'try', 'trials', 'incubator', 'canary', 'unstable', 'next-gen', 'beta', 'alpha'] },
   { id: 'ai', glyph: 'sparkle', hue: 268, hue2: 300, names: ['ai', 'ml', 'llm', 'llms', 'agents', 'agent', 'prompts', 'prompt', 'embeddings', 'neural', 'nlp', 'genai', 'gpt', 'openai', 'anthropic', 'claude-ai', 'rag', 'langchain', 'mcp', 'copilot', 'intelligence', 'inference', 'training'] },
   { id: 'claude', glyph: 'sparkle', hue: 45, hue2: 20, names: ['.claude', 'claude', '.anthropic', 'skills'] },
@@ -173,23 +173,23 @@ export const FOLDER_ICONS = [
   { id: 'workers', glyph: 'gear', hue: 15, names: ['service-worker', 'serviceworker', 'sw', 'web-workers', 'webworkers', 'daemons', 'daemon'] },
   { id: 'links', glyph: 'link', hue: 210, names: ['links', 'link', 'bookmarks', 'bookmark', 'urls', 'shortcuts', 'shortlinks', 'redirects', 'symlinks', 'aliases', 'alias'] },
   { id: 'cdn', glyph: 'globe', hue: 180, names: ['cdn', 'origin', 'mirrors', 'mirror'] },
-  { id: 'lang-python', mono: 'Py', hue: 232, hue2: 262, names: ['python', 'py', 'venv', '.venv', 'virtualenv', '.virtualenv', 'site-packages', 'pip', 'poetry', 'conda', '.tox', '.nox', '__pypackages__', 'django', 'flask', 'fastapi'] },
+  { id: 'lang-python', mono: 'PY', hue: 232, hue2: 262, names: ['python', 'py', 'venv', '.venv', 'virtualenv', '.virtualenv', 'site-packages', 'pip', 'poetry', 'conda', '.tox', '.nox', '__pypackages__', 'django', 'flask', 'fastapi'] },
   { id: 'lang-typescript', mono: 'TS', hue: 255, names: ['typescript', 'ts', 'tsx'] },
   { id: 'lang-javascript', mono: 'JS', hue: 95, names: ['javascript', 'js', 'jsx', 'node', 'nodejs', 'deno', 'bun'] },
-  { id: 'lang-go', mono: 'Go', hue: 212, names: ['go', 'golang'] },
-  { id: 'lang-rust', mono: 'Rs', hue: 42, hue2: 22, names: ['rust', 'rs', 'cargo', '.cargo'] },
+  { id: 'lang-go', mono: 'GO', hue: 212, names: ['go', 'golang'] },
+  { id: 'lang-rust', mono: 'RS', hue: 42, hue2: 22, names: ['rust', 'rs', 'cargo', '.cargo'] },
   { id: 'lang-java', glyph: 'coffee', hue: 38, hue2: 15, names: ['java', 'jvm', 'spring', 'springboot', 'maven', '.mvn', 'quarkus'] },
-  { id: 'lang-kotlin', mono: 'Kt', hue: 292, hue2: 330, names: ['kotlin', 'kt', 'kmp', 'ktor'] },
-  { id: 'lang-swift', mono: 'Sw', hue: 40, hue2: 18, names: ['swift', 'swiftui', '.swiftpm', '.build-swift'] },
+  { id: 'lang-kotlin', mono: 'KT', hue: 292, hue2: 330, names: ['kotlin', 'kt', 'kmp', 'ktor'] },
+  { id: 'lang-swift', mono: 'SW', hue: 40, hue2: 18, names: ['swift', 'swiftui', '.swiftpm', '.build-swift'] },
   { id: 'lang-csharp', mono: 'C#', hue: 300, names: ['csharp', 'cs', 'dotnet', '.net', 'aspnet', 'blazor', 'nuget', '.nuget'] },
   { id: 'lang-cpp', mono: 'C++', hue: 252, names: ['cpp', 'c++', 'cxx', 'include', 'includes', 'inc', 'headers', 'c'] },
   { id: 'lang-php', mono: 'PHP', hue: 278, names: ['php', 'laravel', 'symfony', 'wordpress', 'wp-content', 'wp-includes', 'wp-admin'] },
   { id: 'lang-ruby', glyph: 'gem', hue: 18, hue2: 0, names: ['ruby', 'rb', 'rails', '.bundle'] },
-  { id: 'lang-dart', mono: 'Dart', hue: 205, names: ['dart', '.dart_tool', 'pub-cache'] },
+  { id: 'lang-dart', mono: 'DA', hue: 205, names: ['dart', '.dart_tool', 'pub-cache'] },
   { id: 'lang-elixir', glyph: 'drop', hue: 290, names: ['elixir', 'ex', 'phoenix', '_build'] },
   { id: 'lang-haskell', glyph: 'lambda', hue: 285, names: ['haskell', 'hs', '.stack-work', 'dist-newstyle', 'elm-stuff', 'clojure', 'ocaml', '_opam'] },
-  { id: 'lang-lua', mono: 'Lua', hue: 255, hue2: 270, names: ['lua', 'luarocks', 'nvim', 'neovim'] },
-  { id: 'lang-zig', mono: 'Zig', hue: 65, hue2: 45, names: ['zig', 'zig-cache', '.zig-cache', 'zig-out'] },
+  { id: 'lang-lua', mono: 'LUA', hue: 255, hue2: 270, names: ['lua', 'luarocks', 'nvim', 'neovim'] },
+  { id: 'lang-zig', mono: 'ZIG', hue: 65, hue2: 45, names: ['zig', 'zig-cache', '.zig-cache', 'zig-out'] },
   { id: 'react', glyph: 'atom', hue: 200, names: ['react', 'reactjs', 'react-app', 'preact'] },
   { id: 'vue', glyph: 'vee', hue: 158, names: ['vue', 'vuejs'] },
   { id: 'svelte', glyph: 'ribbon', hue: 28, names: ['svelte', 'sveltekit', '.svelte-kit'] },
